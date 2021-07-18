@@ -7,11 +7,11 @@ Demo on Himax WE-I Plus EVB Endpoint AI Development Board**
 We collocate 15 types of Articulation disorder and non-Articulation disorder voice for this classifaction.
 On the original Trainning have a great performance, but we wish it can run on the embedded-system use TFLite Model.
 
-The original model is used to support doctor to check the pantient's pronunciation is right or not
+The original model is used to support doctor to check the pantient's pronunciation is true or not
 And this project is for the familly to check the baby wheather have Articulation disorder or not ,so we want it run on the embedded-system.
 
 Because we need to run on the embedded-system, we need to shrink the original model and function, and we purpose send the raw file to the model to predict.
-In the test, we need to sort the result for the two type ("Right", "False") for the smaller size for the embedded-system.
+In the test, we need to sort the result for the two type ("True", "False") for the smaller size for the embedded-system.
 
 
 Code Explain:
