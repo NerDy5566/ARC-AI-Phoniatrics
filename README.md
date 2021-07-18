@@ -10,14 +10,15 @@ On the original Trainning have a great performance, but we wish it can run on th
 The original model is used to support doctor to check the pantient's pronunciation is right or not
 And this project is for the familly to check the baby wheather have Articulation disorder or not ,so we want it run on the embedded-system.
 
-Because we need to run on the embedded-system, we need to shrink the original model and function.
+Because we need to run on the embedded-system, we need to shrink the original model and function, and we purpose send the raw file to the model to predict.
 In the test, we need to sort the result for the two type ("Right", "False") for the smaller size for the embedded-system.
 
 
 Code Explain:
   
-  First we need to prepare for the trainning dataset.
+  Trainning Dataset prepare:
   
+  We use the librosa to read and resize the smaple rate and label it.
 ```python
 def read_audio_from_filename(filename, target_sr, ori_sr):
     audio, _ = librosa.load(filename, sr=ori_sr, mono=True)
@@ -27,3 +28,58 @@ def read_audio_from_filename(filename, target_sr, ori_sr):
     #print(audio_target_sr.shape)
     return audio_target_sr
 ```
+
+  Model design:
+  
+  ```python
+def m5(num_classes=5):
+    print('Using Model M5')
+    m = Sequential()
+    m.add(Conv2D(64,
+                 input_shape=(AUDIO_LENGTH, 1, 1),
+                 kernel_size=(80,1),
+                 strides=(4,1),
+                 padding='same',
+                 kernel_initializer='glorot_uniform',
+                 kernel_regularizer=regularizers.l2(l=0.0001)))
+
+    # m.add(BatchNormalization())
+    # m.add(Activation('relu'))
+    # m.add(MaxPooling2D(pool_size=(4,1), strides=None))
+    # m.add(Conv2D(128,
+    #              kernel_size=(3,1),
+    #              strides=(1,1),
+    #              padding='same',
+    #              kernel_initializer='glorot_uniform',
+    #              kernel_regularizer=regularizers.l2(l=0.0001)))
+
+    m.add(BatchNormalization())
+    m.add(Activation('relu'))
+    m.add(MaxPooling2D(pool_size=(4,1), strides=None))
+    m.add(Conv2D(256,
+                 kernel_size=(3,1),
+                 strides=(1,1),
+                 padding='same',
+                 kernel_initializer='glorot_uniform',
+                 kernel_regularizer=regularizers.l2(l=0.0001)))
+
+    # m.add(BatchNormalization())
+    # m.add(Activation('relu'))
+    # m.add(MaxPooling2D(pool_size=(4,1), strides=None))
+    # m.add(Conv2D(512,
+    #              kernel_size=(3,1),
+    #              strides=(1,1),
+    #              padding='same',
+    #              kernel_initializer='glorot_uniform',
+    #              kernel_regularizer=regularizers.l2(l=0.0001)))
+
+    m.add(BatchNormalization())
+    m.add(Activation('relu'))
+    m.add(MaxPooling2D(pool_size=(4,1), strides=None))
+    # m.add(Lambda(lambda x: K.mean(x, axis=1)))
+    m.add(Flatten())
+    m.add(Dense(num_classes, activation='softmax'))
+    return m
+```
+  
+  
