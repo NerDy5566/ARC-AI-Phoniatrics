@@ -4,7 +4,7 @@ Articulation disorder is a common language problem in children, resulting in inc
 **Enviroment: Python 3.8
 Demo on Himax WE-I Plus EVB Endpoint AI Development Board**
 
-We collocate 15 types of Articulation disorder and non-Articulation disorder for this classifaction.
+We collocate 15 types of Articulation disorder and non-Articulation disorder voice for this classifaction.
 On the original Trainning have a great performance, but we wish it can run on the embedded-system use TFLite Model.
 
 The original model is used to support doctor to check the pantient's pronunciation is right or not
