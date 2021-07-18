@@ -12,3 +12,18 @@ And this project is for the familly to check the baby wheather have Articulation
 
 Because we need to run on the embedded-system, we need to shrink the original model and function.
 In the test, we need to sort the result for the two type ("Right", "False") for the smaller size for the embedded-system.
+
+
+Code Explain:
+  
+  First we need to prepare for the trainning dataset.
+  
+  '''python
+  def read_audio_from_filename(filename, target_sr, ori_sr):
+    audio, _ = librosa.load(filename, sr=ori_sr, mono=True)
+    audio_target_sr = librosa.resample(y=audio, orig_sr=_, target_sr=target_sr) # ori_sr to target_sr
+    audio_target_sr = audio_target_sr.reshape(-1, 1)
+    #print(audio.shape)
+    #print(audio_target_sr.shape)
+    return audio_target_sr
+  '''
