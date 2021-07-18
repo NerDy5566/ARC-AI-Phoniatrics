@@ -18,8 +18,8 @@ Code Explain:
   
   First we need to prepare for the trainning dataset.
   
-    We use the librosa to resize the sample rate to the 16000.
-    ```python
+   We use the librosa to resize the sample rate to the 16000.
+    ```python3.8
     def read_audio_from_filename(filename, target_sr, ori_sr):
     audio, _ = librosa.load(filename, sr=ori_sr, mono=True)
     audio_target_sr = librosa.resample(y=audio, orig_sr=_, target_sr=target_sr) # ori_sr to target_sr
