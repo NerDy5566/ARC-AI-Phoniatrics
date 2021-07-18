@@ -69,7 +69,7 @@ def m5(num_classes=5):
 
   Convert to TFLite Model:
   
-  Because of the Development Board's microphone device was use int16 dtype, we want to change our input type to int16 to save normalization Time
+  Because of the Development Board's microphone device was use int16 dtype, we want to change our input type to int16 to save normalization Time, and reduce operation stress.
   
   ```python
 def representative_data_gen():
