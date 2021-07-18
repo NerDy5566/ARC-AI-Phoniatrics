@@ -43,16 +43,6 @@ def m5(num_classes=5):
                  kernel_initializer='glorot_uniform',
                  kernel_regularizer=regularizers.l2(l=0.0001)))
 
-    # m.add(BatchNormalization())
-    # m.add(Activation('relu'))
-    # m.add(MaxPooling2D(pool_size=(4,1), strides=None))
-    # m.add(Conv2D(128,
-    #              kernel_size=(3,1),
-    #              strides=(1,1),
-    #              padding='same',
-    #              kernel_initializer='glorot_uniform',
-    #              kernel_regularizer=regularizers.l2(l=0.0001)))
-
     m.add(BatchNormalization())
     m.add(Activation('relu'))
     m.add(MaxPooling2D(pool_size=(4,1), strides=None))
@@ -62,16 +52,6 @@ def m5(num_classes=5):
                  padding='same',
                  kernel_initializer='glorot_uniform',
                  kernel_regularizer=regularizers.l2(l=0.0001)))
-
-    # m.add(BatchNormalization())
-    # m.add(Activation('relu'))
-    # m.add(MaxPooling2D(pool_size=(4,1), strides=None))
-    # m.add(Conv2D(512,
-    #              kernel_size=(3,1),
-    #              strides=(1,1),
-    #              padding='same',
-    #              kernel_initializer='glorot_uniform',
-    #              kernel_regularizer=regularizers.l2(l=0.0001)))
 
     m.add(BatchNormalization())
     m.add(Activation('relu'))
