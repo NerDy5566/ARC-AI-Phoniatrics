@@ -64,3 +64,28 @@ def m5(num_classes=5):
 
   Confusion Matrix:
   
+  ![GITHUB]( https://github.com/NerDy5566/ARC-AI-Phoniatrics/blob/main/confusion_matrix.png "confusion_matrix.png")
+
+
+  Convert to TFLite Model:
+  
+  Because of the Development Board's microphone device was use int16 dtype, we want to change our input type to int16 to save normalization Time
+  
+  ```python
+def representative_data_gen():
+  for input_value in tf.data.Dataset.from_tensor_slices(X_train).batch(1).take(100):
+    # Model has only one input so each data point has one element.
+    yield [input_value]
+
+converter = tf.lite.TFLiteConverter.from_keras_model(model)
+converter.optimizations = [tf.lite.Optimize.DEFAULT]
+converter.representative_dataset = representative_data_gen
+
+# Ensure that if any ops can't be quantized, the converter throws an error
+converter.target_spec.supported_ops = [tf.lite.OpsSet.EXPERIMENTAL_TFLITE_BUILTINS_ACTIVATIONS_INT16_WEIGHTS_INT8]
+
+# Set the input and output tensors to INT16 (APIs added in r2.3)
+converter.inference_input_type = tf.int16
+converter.inference_output_type = tf.int16
+tflite_model_quant = converter.convert()
+  ```
