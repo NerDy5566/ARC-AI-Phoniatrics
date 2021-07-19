@@ -18,6 +18,7 @@ Code Explain:
   
   Trainning Dataset prepare:
   
+  We total have 18871 audio files for this program, and we use augmentation method to expand to **27631 files**.
   We use the librosa to read and resize the smaple rate and label it.
 ```python
 def read_audio_from_filename(filename, target_sr, ori_sr):
